@@ -1,0 +1,24 @@
+Imports System
+Imports System.Runtime.Serialization
+Imports System.Security.Cryptography.X509Certificates
+
+Module hello
+    Sub main()
+        Dim save = elements(1, 2, 3)
+        Console.WriteLine(save)
+
+        Console.ReadLine()
+    End Sub
+    Function elements(ParamArray items() As Double) As String
+        Dim numOfItem As Integer = items.Length
+        Dim sum As Double = 0
+        For Each value In items
+            sum += value
+        Next
+        Dim average As Double = sum / numOfItem
+        Dim result As String = numOfItem & " items found" & vbCrLf & "Average: " & average
+
+        Return result
+    End Function
+
+End Module

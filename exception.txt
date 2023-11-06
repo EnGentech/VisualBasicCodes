@@ -1,0 +1,24 @@
+Imports System
+Imports System.Runtime.Serialization
+Imports System.Security.Cryptography.X509Certificates
+
+Module hello
+    Sub main()
+        Console.WriteLine(div(50, 2))
+        Console.WriteLine(div(50, 0))
+    End Sub
+    Function div(ByVal num1 As Integer, ByVal num2 As Integer) As String
+        Try
+            If num2 <= 0 Then
+                Throw New Exception("Only positive numbers are allowed for the denominator")
+            Else
+                Dim result As Double = num1 / num2
+                Return num1 & " divided by " & num2 & " = " & result
+            End If
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+
+    End Function
+
+End Module
