@@ -1,0 +1,58 @@
+Imports System
+
+Module numeric_either
+
+    Sub Main(args As String())
+        Console.WriteLine(FormatNumber(1000))
+        While True
+            Console.Write("Enter your conversion type: ['memory', 'currency', 'quit']$ ")
+            Dim selection As String = Nothing
+            Dim line As String = "=================================="
+            selection = Console.ReadLine()
+            Console.WriteLine()
+            If selection <> "memory" And selection <> "quit" And selection <> "currency" Then
+                Console.WriteLine(line)
+                Console.WriteLine("        Invalid Selection!")
+                Console.WriteLine(line)
+            ElseIf selection = "currency" Then
+                Console.Write("Select your input currency: ['naira', 'dollar']$ ")
+                Dim money As String = Nothing
+                money = Console.ReadLine()
+                If money <> "naira" And money <> "dollar" Then
+                    Console.WriteLine(line)
+                    Console.WriteLine("          Invalid Selection")
+                    Console.WriteLine(line)
+                    Console.WriteLine()
+                Else
+                    Console.Write("Enter your amount: ")
+                    Dim amount As Double = Nothing
+                    Dim converter As Double = Nothing
+                    amount = Console.ReadLine()
+                    Console.WriteLine()
+                    If money = "naira" Then
+                        converter = amount / 720
+                        Console.WriteLine(line)
+                        Console.WriteLine("#" & amount.ToString("#,##0") & " is equivalent to " & "$" & converter.ToString("#,##0"))
+                        Console.WriteLine(line)
+                    ElseIf money = "dollar" Then
+                        converter = amount * 720
+                        Console.WriteLine(line)
+                        Console.WriteLine("$" & amount.ToString("#,##0") & " is equivalent to " & "#" & converter.ToString("#,##0"))
+                        Console.WriteLine(line)
+                    End If
+                End If
+            ElseIf selection = "memory" Then
+                Console.WriteLine(line)
+                Console.WriteLine(" Service in progress, check back")
+                Console.WriteLine(line)
+            ElseIf selection = "quit" Then
+                Console.WriteLine(line)
+                Console.WriteLine("        Good Bye my friend!")
+                Console.WriteLine(line)
+                Exit While
+            End If
+
+        End While
+
+    End Sub
+End Module
