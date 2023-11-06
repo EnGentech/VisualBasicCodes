@@ -1,0 +1,36 @@
+Imports System
+Imports System.Runtime.Serialization
+Imports System.Security.Cryptography.X509Certificates
+
+Module triange_shape
+    Sub main()
+        Dim range As Integer
+        Console.Write("Enter shape size$ ")
+        range = Console.ReadLine()
+        While True
+            If range Mod 2 = 0 Then
+                Console.Write("Invalid, enter an odd value$ ")
+                range = Console.ReadLine()
+            Else
+                Exit While
+            End If
+        End While
+        Dim space As Integer = (range / 2) * 2
+        Dim symbol As String = "*"
+
+
+        For x = 1 To range Step 2
+            Dim result As String = String.Concat(Enumerable.Repeat(" ", space))
+            Console.Write(result)
+            For y = 1 To x
+                Console.Write("* ")
+            Next
+            space -= 2
+            Console.WriteLine()
+        Next
+
+
+        Console.ReadLine()
+    End Sub
+
+End Module
