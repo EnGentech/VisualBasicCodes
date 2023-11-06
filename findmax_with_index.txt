@@ -1,0 +1,21 @@
+Imports System
+Imports System.Runtime.Serialization
+Imports System.Security.Cryptography.X509Certificates
+
+Module hello
+    Sub main()
+        findMax(2, 4, 16, 3, 1, 4, 7, 84, 71, 6, 23)
+
+    End Sub
+    Sub findMax(ParamArray elements() As Integer)
+        Dim number As Integer = 0
+        For Each value In elements
+            If value > number Then
+                number = value
+            End If
+        Next
+        Dim index As Integer = Array.IndexOf(elements, number)
+        Console.WriteLine("Max Number: " & number & " at index " & index)
+    End Sub
+
+End Module

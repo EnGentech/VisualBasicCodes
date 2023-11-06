@@ -1,0 +1,49 @@
+Imports System
+Imports System.Runtime.Serialization
+Imports System.Security.Cryptography.X509Certificates
+
+Module hello
+    Public lockpass As New Dictionary(Of String, String)
+    Sub main()
+        Console.WriteLine(add("Gentle", "admin23"))
+        Console.WriteLine(add("ruth", "ruth1998"))
+        Console.WriteLine(add("founder", "heritage@poly1104"))
+        Console.WriteLine(add("blessing", "special@angel22"))
+        Console.WriteLine(view("founder"))
+        Console.WriteLine(view("precious"))
+        Console.WriteLine(del("blessing"))
+        Console.WriteLine(del("blessing"))
+        Console.ReadLine()
+    End Sub
+    Function add(ByVal name As String, ByVal password As String) As String
+        lockpass.Add(name, password)
+        Return name & " has been added successfully"
+    End Function
+
+    Function view(ByVal name As String) As String
+        Try
+            If lockpass.ContainsKey(name) Then
+                Return "Your password @" & name & ": " & lockpass(name)
+            Else
+                Throw New KeyNotFoundException("Name not found")
+            End If
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+
+    End Function
+
+    Function del(ByVal name As String) As String
+        Try
+            If lockpass.ContainsKey(name) Then
+                lockpass.Remove(name)
+                Return name & " has been deleted"
+            Else
+                Throw New KeyNotFoundException("Name not found")
+            End If
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
+
+End Module
