@@ -1,0 +1,114 @@
+Imports System
+Imports System.ComponentModel.Design
+
+Module resistorCalculator
+    Sub Main(args As String())
+        seperator("*", 50) ' Dont edit this line
+
+        Dim obtained = input()
+        Rcode(obtained(0), obtained(1), obtained(2)) ' You can make changes here to test your code
+
+        seperator("*", 50) ' Dont edit this line
+
+        Console.ReadLine()
+    End Sub
+    Sub center(ByVal message As String, Optional ByVal size As Integer = 50)
+        Dim space As Integer = 0
+        Dim stringLenght As Integer = message.Length
+        Dim subLen As Integer = size - stringLenght
+        Dim spaceCharacter As String
+        space = subLen / 2
+        If size >= 40 Then
+            spaceCharacter = String.Concat(Enumerable.Repeat(" ", space))
+        End If
+
+
+        If size < 40 Then
+            Console.WriteLine("Warning: Size must be above 40")
+        Else
+            Console.WriteLine(spaceCharacter & message)
+        End If
+
+
+    End Sub
+    Sub seperator(ByVal character As String, Optional ByVal size As Integer = 50)
+        If size < 40 Then
+            Console.WriteLine("Warning: Size must be above 40")
+        Else
+            Dim sep As String = String.Concat(Enumerable.Repeat(character, size))
+            Console.WriteLine(sep)
+        End If
+
+    End Sub
+
+    Sub Rcode(ByVal firstcolor As String, ByVal secondColor As String, ByVal multiplier As String)
+        Dim Rcolors As Array = {"black", "brown", "red", "orange", "yellow", "grey", "blue", "violet", "gold", "white"}
+        Dim coloList As New List(Of String)
+        Dim errorlist As New List(Of String)
+        coloList.Add(firstcolor)
+        coloList.Add(secondColor)
+        coloList.Add(multiplier)
+        Dim check As Integer = 0
+
+        For Each color In coloList
+            For Each colors In Rcolors
+                If colors = color Then
+                    check = 1
+                    Exit For
+                Else
+                    check = 0
+                End If
+            Next
+            If check = 0 Then
+                errorlist.Add(color & " is not a valid resistor color")
+            End If
+        Next
+
+        For Each errors In errorlist
+            center(errors)
+        Next
+
+        If errorlist.Count = 0 Then
+            Dim cal As Double = Nothing
+            Dim response As String = "Resistor Value: "
+            Dim mult As String
+            Dim leadZero As String = String.Concat(Enumerable.Repeat("0", Array.IndexOf(Rcolors, multiplier)))
+            If multiplier = "black" Then
+                mult = 1
+            Else
+                mult = 1 & leadZero
+            End If
+            cal = (Array.IndexOf(Rcolors, firstcolor) & Array.IndexOf(Rcolors, secondColor)) * mult
+            If cal >= 100000 Then
+                Dim mohms As Double = cal / 100000
+                center(response & mohms & "mohms")
+            ElseIf cal >= 1000 Then
+                Dim kohms As Double = cal / 1000
+                center(response & kohms & "kohms")
+            Else
+                center(response & cal & "ohms")
+            End If
+        End If
+
+    End Sub
+    Function input() As List(Of String)
+        Dim colors As New List(Of String)
+        Dim firstcolor As String
+        Dim secondcolor As String
+        Dim multipler As String
+        Console.Write("Enter color1$ ")
+        firstcolor = Console.ReadLine()
+        colors.Add(firstcolor)
+        Console.WriteLine()
+        Console.Write("Enter color2$ ")
+        secondcolor = Console.ReadLine()
+        colors.Add(secondcolor)
+        Console.WriteLine()
+        Console.Write("Enter multiplier color$ ")
+        multipler = Console.ReadLine()
+        colors.Add(multipler)
+        Console.WriteLine()
+
+        Return colors
+    End Function
+End Module
